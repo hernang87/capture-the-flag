@@ -17,10 +17,15 @@ export function Loader({ url }: LoaderArgs): JSX.Element {
       .then((text) => {
         setText(text);
         setLoading(false);
-      }).catch(() => setLoading(false));
+      })
+      .catch(() => setLoading(false));
 
     return () => controller.abort();
   }, [url]);
 
-  return <div>Loading...</div>;
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  return <div>{text}</div>;
 }
