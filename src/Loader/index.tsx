@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { LoaderArgs } from "./types";
+import { Typewriter } from "../Typewriter";
 
 export function Loader({ url }: LoaderArgs): JSX.Element {
   const [text, setText] = React.useState<string | null>(null);
   const [loading, setLoading] = React.useState<boolean>(false);
 
-  // UseMount
   useEffect(() => {
     setLoading(true);
 
@@ -27,5 +27,9 @@ export function Loader({ url }: LoaderArgs): JSX.Element {
     return <div>Loading...</div>;
   }
 
-  return <div>{text}</div>;
+  if (!text) {
+    return <div>Error loading text</div>;
+  }
+
+  return <Typewriter text={text} speed={1000} />;
 }
