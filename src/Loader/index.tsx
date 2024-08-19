@@ -15,10 +15,13 @@ export function Loader({ url }: LoaderArgs): JSX.Element {
     fetch(url, { signal })
       .then((response) => response.text())
       .then((text) => {
-        setText(text);
         setLoading(false);
+        setText(text);
       })
-      .catch(() => setLoading(false));
+      .catch(() => {
+        setLoading(false);
+        setText(null);
+      });
 
     return () => controller.abort();
   }, [url]);
